@@ -19,8 +19,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # custom apps
     "apps.accounts.apps.AccountsConfig",
+    "apps.uavs.apps.UavsConfig",
+    "apps.uav_rentals.apps.UavRentalsConfig",
     # shared module
     "apps.shared.apps.SharedConfig",
+    # third party modules
+    "mptt",
 ]
 
 MIDDLEWARE = [
