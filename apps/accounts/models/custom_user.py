@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db import models
+from django.utils.text import slugify
 
 from apps.shared.models import TrackingModel
 
@@ -28,3 +29,8 @@ class CustomUser(AbstractUser, TrackingModel):
             result += f" - {self.get_full_name()}"
 
         return result
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.username)
+        super().save(*args, **kwargs)
