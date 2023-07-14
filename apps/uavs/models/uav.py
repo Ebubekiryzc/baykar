@@ -1,14 +1,18 @@
-from django.db import models
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.utils.text import slugify
+from parler.models import TranslatableModel, TranslatedFields
 
-from apps.uavs.models import UAVCategory, UAVManifacturer
 from apps.shared.models import TrackingModel
+from apps.uavs.models import UAVCategory, UAVManifacturer
 
 
-class UAV(TrackingModel):
-    name = models.CharField(max_length=255, blank=True, null=True)
-    slug = models.SlugField(max_length=255, unique=True)
-    description = models.TextField()
+class UAV(TrackingModel, TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=255, blank=True, null=True),
+        slug=models.SlugField(max_length=255, unique=True),
+        description=models.TextField(),
+    )
     uav_category = models.ForeignKey(
         UAVCategory, on_delete=models.PROTECT, related_name="uavs"
     )
@@ -20,3 +24,8 @@ class UAV(TrackingModel):
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.username)
+        super().save(*args, **kwargs)
