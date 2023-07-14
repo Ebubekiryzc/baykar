@@ -1,6 +1,6 @@
-from pathlib import Path
 import os
 from datetime import timedelta
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "apps.shared.apps.SharedConfig",
     # third party modules
     "mptt",
+    "parler",
     "rest_framework_simplejwt.token_blacklist",
 ]
 
@@ -88,10 +89,29 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = "tr-TR"
+LANGUAGES = [
+    ("en", "English"),
+    ("tr", "Turkish"),
+]
+
 TIME_ZONE = "Europe/Istanbul"
 USE_I18N = True
+USE_L10N = True
 USE_TZ = True
-
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "locale"),
+]
+PARLER_DEFAULT_LANGUAGE_CODE = "en"
+PARLER_LANGUAGES = {
+    None: (
+        {"code": "en"},
+        {"code": "tr"},
+    ),
+    "default": {
+        "fallback": "en",
+        "hide_untranslated": False,
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
