@@ -1,14 +1,17 @@
 from apps.uavs.models import UAVCategory
+from parler_rest.serializers import (TranslatableModelSerializer,
+                                     TranslatedFieldsField)
 from rest_framework import serializers
 
 
-class UAVCategorySerializer(serializers.ModelSerializer):
+class UAVCategorySerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=UAVCategory)
+
     class Meta:
         model = UAVCategory
         fields = [
             "id",
-            "name",
-            "slug",
+            "translations",
             "created_at",
             "updated_at",
         ]

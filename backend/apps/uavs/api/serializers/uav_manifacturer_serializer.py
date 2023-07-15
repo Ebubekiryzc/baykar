@@ -1,24 +1,24 @@
+from apps.uavs.models import UAVManifacturer
+from parler_rest.serializers import TranslatableModelSerializer, TranslatedFieldsField
 from rest_framework import serializers
 
-from apps.uavs.models import UAVManifacturer
 
-
-class UAVManifacturerSerializer(serializers.ModelSerializer):
-    children = serializers.SerializerMethodField()
-    image = serializers.ImageField(max_length=None, allow_empty_file=True, use_url=True)
+class UAVManifacturerSerializer(TranslatableModelSerializer):
+    translations = TranslatedFieldsField(shared_model=UAVManifacturer)
+    childrens = serializers.SerializerMethodField()
 
     class Meta:
         model = UAVManifacturer
         fields = [
             "id",
-            "name",
-            "slug",
             "parent",
-            "children",
+            "childrens",
             "created_at",
             "updated_at",
+            "translations",
         ]
 
-    def get_children(self, obj):
-        serializer = self.__class__(obj.children.all(), many=True)
+    def get_childrens(self, obj):
+        children = obj.get_children()
+        serializer = self.__class__(children, many=True)
         return serializer.data

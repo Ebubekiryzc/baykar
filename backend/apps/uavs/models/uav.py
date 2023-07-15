@@ -10,7 +10,7 @@ from apps.uavs.models import UAVCategory, UAVManifacturer
 class UAV(TrackingModel, TranslatableModel):
     translations = TranslatedFields(
         name=models.CharField(max_length=255, blank=True, null=True),
-        slug=models.SlugField(max_length=255, unique=True),
+        slug=models.SlugField(max_length=255, unique=True, blank=True, null=True),
         description=models.TextField(),
     )
     uav_category = models.ForeignKey(
@@ -23,9 +23,4 @@ class UAV(TrackingModel, TranslatableModel):
     images = GenericRelation("shared.Image")
 
     def __str__(self) -> str:
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.username)
-        super().save(*args, **kwargs)
+        return str(self.id)

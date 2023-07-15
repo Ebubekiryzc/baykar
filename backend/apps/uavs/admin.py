@@ -1,9 +1,9 @@
+from apps.shared.admin import ImageInline
+from apps.uavs.forms import UAVManifacturerForm
+from apps.uavs.models import *
 from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 from parler.admin import TranslatableAdmin
-
-from apps.shared.admin import ImageInline
-from apps.uavs.models import *
 
 
 # Register your models here.
@@ -38,6 +38,7 @@ class UAVCategoryAdmin(TranslatableAdmin):
 
 @admin.register(UAVManifacturer)
 class UAVManifacturerAdmin(DraggableMPTTAdmin, TranslatableAdmin):
+    form = UAVManifacturerForm
     list_display = [
         "tree_actions",
         "indented_title",

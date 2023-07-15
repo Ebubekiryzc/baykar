@@ -1,0 +1,9 @@
+.modalContent {
+    background: var(--background-color) !important;
+    color: var(--text-color) !important;
+}
+
+.modalCloseButton {
+    cursor: pointer;
+    color: var(--text-color);
+}

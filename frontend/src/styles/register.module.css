@@ -1,0 +1,13 @@
+.formTitle {
+    color: var(--text-color);
+}
+
+.userInput {
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--text-color);
+}
+
+.infoText {
+    color: var(--text-color);
+}

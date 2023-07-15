@@ -1,0 +1,36 @@
+:root,
+.dark {
+    /* animation */
+    --color-transition: 1s all ease;
+    /* colors */
+    --background-color: #fafafa;
+    --text-color: #333;
+    --text-color-opacity-50: #33333350;
+    --orange-color: #fcba04;
+    --red-color: #f93943;
+    --green-color: #A2FAA3;
+}
+
+.light {
+    --background-color: #121212;
+    --text-color: #eee;
+    --text-color-opacity-50: #bbbbbb50;
+}
+
+/* styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: var(--color-transition);
+}
+
+main {
+    background-color: var(--background-color);
+    height: 100vh;
+    width: 100%;
+}
+
+.section-padding{
+    padding-top: 120px;
+}

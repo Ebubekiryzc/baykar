@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-zsvr#f=u5b@qvu_ttypark@4zcow2k@d64_66gdz9%g2jxkt(+"
 DEBUG = True
 ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = []
+CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
 
 # Application definition
 INSTALLED_APPS = [
@@ -18,6 +18,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # custom apps
     "apps.accounts.apps.AccountsConfig",
     "apps.uavs.apps.UavsConfig",
@@ -27,12 +28,15 @@ INSTALLED_APPS = [
     # third party modules
     "mptt",
     "parler",
+    "parler_rest",
     "rest_framework_simplejwt.token_blacklist",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -86,6 +90,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# SITES
+SITE_ID = 1
 
 # Internationalization
 LANGUAGE_CODE = "tr-TR"
@@ -103,12 +109,12 @@ LOCALE_PATHS = [
 ]
 PARLER_DEFAULT_LANGUAGE_CODE = "en"
 PARLER_LANGUAGES = {
-    None: (
+    SITE_ID: (
         {"code": "en"},
         {"code": "tr"},
     ),
     "default": {
-        "fallback": "en",
+        "fallbacks": ["en", "tr"],
         "hide_untranslated": False,
     },
 }
@@ -128,14 +134,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Rest Framework
 REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
 }
 
 # JWT Config
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,

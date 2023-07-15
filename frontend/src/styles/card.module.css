@@ -1,0 +1,75 @@
+.customCard {
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.007),
+        0 100px 80px rgba(0, 0, 0, 0.12)
+}
+
+.customCardContent {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.imageContent {
+    position: relative;
+    display: flex;
+    height: 200px;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, transparent, #2878e0);
+}
+
+.image {
+    width: 75% !important;
+    height: 75% !important;
+    object-fit: contain;
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: 30px;
+    margin-bottom: 10px;
+    animation: move_bottom_to_top 2s;
+}
+
+.textContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.title {
+    color: var(--text-color);
+    text-transform: capitalize;
+    margin: 0;
+}
+
+.smallText {
+    color: var(--text-color-opacity-50);
+    margin-top: -15px;
+}
+
+.category {
+    color: var(--text-color);
+}
+
+.weight {
+    color: var(--text-color);
+}
+
+@keyframes move_bottom_to_top {
+    0% {
+        translate: 15px 15px;
+    }
+
+    100% {
+        translate: 0 0;
+    }
+}

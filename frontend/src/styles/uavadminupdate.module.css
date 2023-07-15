@@ -1,0 +1,9 @@
+.userInput {
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--text-color);
+}
+
+.formTitle {
+    color: var(--text-color);
+}

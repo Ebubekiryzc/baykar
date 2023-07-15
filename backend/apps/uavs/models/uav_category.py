@@ -1,8 +1,6 @@
-from django.db import models
-from django.utils.text import slugify
-from parler.models import TranslatableModel, TranslatedFields
-
 from apps.shared.models import TrackingModel
+from django.db import models
+from parler.models import TranslatableModel, TranslatedFields
 
 
 class UAVCategory(TrackingModel, TranslatableModel):
@@ -12,9 +10,4 @@ class UAVCategory(TrackingModel, TranslatableModel):
     )
 
     def __str__(self) -> str:
-        return self.name
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.username)
-        super().save(*args, **kwargs)
+        return str(self.id)
